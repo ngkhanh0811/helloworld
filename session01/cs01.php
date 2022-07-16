@@ -1,4 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Example</title>
+</head>
+<body>
 <?php
-$patientID = 512;
-echo $patientID;
+echo "Hi, I'm a PHP script!";
 ?>
+</body>
+</html>
