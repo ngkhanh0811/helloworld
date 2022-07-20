@@ -1,13 +1,31 @@
 <html>
-
+<head>
+    <title>Student | Seach</title>
+</head>
 <body>
 <?php
-$myDB = new mysqli('localhost', 'root', '', 'collegeweb' );
-if ($myDB -> connect_errno) {
-    die('Connect Error (' . $myDB ->connect_errno . ')' . $myDB -> connect_errno);
+$stuName = '';
+if(!empty($_POST['stuName'])){
+    $stuName = $_POST['stuName'];
+    echo "Finding record, {$_POST['stuName']}, and Result";
 }
-$sql = "SELECT * FROM student WHERE classID = 'T2109M' ORDER BY stuID";
-$result = $myDB -> query($sql);
+?>
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    Enter your name: <input type="text" name="stuName"/>
+    <input type="submit" value="search"/>
+</form>
+
+<?php
+$myDB = new mysqli('localhost', 'root', '', 'collegeweb' );
+if ($myDB -> connect_error) {
+    die('Connect Error (' . $myDB ->connect_error . ')' . $myDB -> connect_error);
+}
+if ($stuName != ''){
+    $sql = "SELECT * FROM Student WHERE classID = 'T2109M' AND stuName LIKE '%{$stuName}%' order by stuName";
+} else{
+    $sql = "SELECT * FROM Student WHERE classID = 'T2109M' order by stuName";
+}
+$result = $myDB->query($sql);
 ?>
 
 <table cellpadding=" 2" cellspacing="6" align="center" border="1" >
